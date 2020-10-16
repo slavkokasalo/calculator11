@@ -27,7 +27,8 @@ if ((eval(current) === 0) && (current.indexOf(".") === -1)) {
 }
 // dodavanje decimale 
 function addDecimal() {  
-// If there is no number before decimal add 0.    
+// If there is no number before decimal add 0. 
+//ako nema broja prije decimale dodaje se 0
   if (current.length === 0) {
       current = "0.";
   } else 
@@ -69,37 +70,47 @@ function addOperation(op) {
   if (operation !== 0) {      // If user inputs a string of values and operations
     calculate();              // i.e (1+2*3-4) our calculator only deals with two calculations
   }                           // the calculation will always be right. 
+     
+                              // Ako korisnik unese niz vrijednosti i operacija
+                             // tj. (1 + 2 * 3-4) naš kalkulator obrađuje samo dva računa
+                            // račun će uvijek biti točan.
 
   if (op.indexOf("*") > -1) { operation = 1};  // Shortcut to using operations rather than using html.value.
-  if (op.indexOf("/") > -1) { operation = 2};
+  if (op.indexOf("/") > -1) { operation = 2};  //prečac za korištenje operatora da se ne koristi html.value
   if (op.indexOf("+") > -1) { operation = 3}; 
   if (op.indexOf("-") > -1) { operation = 4};
 
   memory = current; // Store each entry in memory variable to always calculate 'current ipnut' against. 
+                    //// Spremi svaki unos u memory varijablu kako bi uvijek izračunao 'trenutni unos'.
   current = ""; // Clear current so we can use it next, now that it is in memory.
+                //Očistite trenutno kako bismo mogli koristiti sljedeće, sada kad je u memoriji.
     
   display.innerHTML = current;
     
 }
 
 function percent(){
+  //ako korisnik želi izračunati postotak broja
  // If user wants to calculate a percentage of a number.
     if(eval(memory) === 0){
         current = current / 100;
     } else { // If the user wants to add use the percentage of a given number. (eg. 50 + 25% (of 50))
+             //Ako korisnik želi dodati, upotrijebite postotak određenog broja. (npr. 50 + 25% (od 50))
        current = (current / 100) * memory; 
     }   
    
  display.innerHTML = current;
 }
 
-// Calculate function
+// Calculate funkcija
 function calculate() {
-// If the operation used was *, multiply memory with current value.   
+// If the operation used was *, multiply memory with current value.
+//Ako je korištena operacija *, pomnožite memoriju s trenutnom vrijednošću.
   if (operation === 1) {
     current = eval(memory) * eval(current);
   }
-// If the operation used was /, multiply memory with current value.    
+// If the operation used was /, multiply memory with current value.
+     //Ako je korištena operacija /, pomnožite memoriju s trenutnom vrijednošću.
   if (operation === 2) {      
   if (eval(current) !== 0) {   // Only if not dividing by 0.  
       current = eval(memory) / eval(current);
@@ -107,6 +118,7 @@ function calculate() {
       current = "Error"; 
     }
   }
+//isto za + i -
 // Same for + and -    
   if (operation === 3) {
     current = eval(memory) + eval(current);
@@ -115,7 +127,8 @@ function calculate() {
     current = eval(memory) - eval(current);
   }
  
-// Reset memory and current. Also force current to a string after the calculation.    
+// Reset memory and current. Also force current to a string after the calculation.
+  // Resetiranje memorije i trenutnog. Također prisilite trenutno na niz nakon računanja.
   current = current + "";    
   operation = 0; 
   memory = "0"; 
