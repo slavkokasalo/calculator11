@@ -10,10 +10,11 @@
 //Global Variables
 var memory = "0", current = "0", operation = 0; 
 const maxChar = 10; 
+//pozivanje displeya iz DOM-a
 // Get display from DOM.
 const display = document.querySelector('.display p');
 
-// Adding a value to screen 
+// dodavanje vrijednosti na zaslon 
 function addValue(dig){ 
      
 if ((eval(current) === 0) && (current.indexOf(".") === -1)) { 
@@ -24,8 +25,8 @@ if ((eval(current) === 0) && (current.indexOf(".") === -1)) {
  
      display.innerHTML = current; 
 }
-// Adding a decimal. 
-function addDecimal() { 
+// dodavanje decimale 
+function addDecimal() {  
 // If there is no number before decimal add 0.    
   if (current.length === 0) {
       current = "0.";
@@ -36,9 +37,10 @@ function addDecimal() {
   
   display.innerHTML = current;
 }
-
+//plusminus funkcija
 // plusMinus function
 function plusMinus() {
+//promjene izmedju pozitivnog i negativnog
 // Changes between positive and negative.      
    if(current.indexOf("-") === 0) {
       current = current.substring(1);
@@ -51,7 +53,7 @@ function plusMinus() {
   
   display.innerHTML = current;
 }
-
+//očisti sve
 // Clear everything
 function allClear() { 
     
@@ -61,7 +63,7 @@ function allClear() {
     
  display.innerHTML = current;
 }
-
+//dodavanje operacije
 // Adding an operation
 function addOperation(op) {
   if (operation !== 0) {      // If user inputs a string of values and operations
